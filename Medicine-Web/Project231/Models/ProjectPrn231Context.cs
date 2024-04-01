@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +26,7 @@ public partial class ProjectPrn231Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(local); Database=Project_prn231; User Id=sa; Password=DatLaid234555@Xy; Trust Server Certificate=True;");
+        => optionsBuilder.UseSqlServer("Server=localhost,1433; Database=MedicineWeb; User Id=sa; Password=DatLaid234555@Xy;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
