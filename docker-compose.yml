@@ -7,8 +7,6 @@ services:
       context: ./Medicine-Web
       dockerfile: Dockerfile
     container_name: back-end
-    environment:
-      - "ConnectionStrings__MyDb=Server=localhost,1433; Database=MedicineWeb; User Id=sa; Password=DatLaid234555@Xy;"
     restart: always
     depends_on:
       - db
@@ -16,7 +14,7 @@ services:
       - db-network
       - app-network
     ports:
-      - "8080:80"
+      - "8080:8080"
 
   front-end:
     image: front-end:v1
