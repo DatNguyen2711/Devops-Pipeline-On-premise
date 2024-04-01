@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 
 services:
   back-end:
@@ -7,8 +7,8 @@ services:
       context: ./Medicine-Web
       dockerfile: Dockerfile
     container_name: back-end
-    # environment:
-    #   - "ConnectionStrings__MyDb=Server=SqlServerDb; Database=MedicineWeb; User Id=sa; Password=234555@Axy; Trust Server Certificate=True;"
+    environment:
+      - "ConnectionStrings__MyDb=Server=localhost,1433; Database=MedicineWeb; User Id=sa; Password=DatLaid234555@Xy;"
     restart: always
     depends_on:
       - db
@@ -48,7 +48,7 @@ services:
     networks:
       - db-network
 
-# docker exec -it database /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 234555@Axy
+# docker exec -it database /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy
 networks:
   db-network:
     driver: bridge
