@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  back-end:
+    image: back-end:v1
+    build:
+      context: ./Medicine-Web
+      dockerfile: Dockerfile
+    container_name: back-end
+    # environment:
+    #   - "ConnectionStrings__MyDb=Server=SqlServerDb; Database=MedicineWeb; User Id=sa; Password=234555@Axy; Trust Server Certificate=True;"
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - db-network
+      - app-network
+    ports:
+      - "8080:80"
+
+  front-end:
+    image: front-end:v1
+    build:
+      context: ./Medicine-Web-FE
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8900:80"
+    depends_on:
+      - back-end
+    networks:
+      - app-network
+
+  db:
+    image: database:v1
+    build:
+      context: ./Database
+      dockerfile: Dockerfile.Database
+    container_name: db
+    restart: always
+    environment:
+      - SA_PASSWORD=DatLaid234555@Xy
+      - ACCEPT_EULA=Y
+    volumes:
+      - ./.docker/data/db:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
+    networks:
+      - db-network
+
+# docker exec -it database /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 234555@Axy
+networks:
+  db-network:
+    driver: bridge
+    name: db-network
+  app-network:
+    driver: bridge
+    name: app-network

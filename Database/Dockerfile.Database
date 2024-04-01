@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/mssql/server:2022-latest
+
+WORKDIR /dbconfig
+
+USER root
+
+COPY . .
+
+RUN chmod u+x /dbconfig/attach.sh
+
+
+ENTRYPOINT  /dbconfig/attach.sh & /opt/mssql/bin/sqlservr 
