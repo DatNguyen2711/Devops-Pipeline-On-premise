@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -10,7 +8,7 @@ docker compose up -d
 
 Open [http://localhost:8900](http://localhost:8900) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `Medicine-Web-FE/src/component/auth/login`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to write API and also ReactJS for client
 
@@ -47,8 +45,8 @@ sh docker-install.sh
 sudo usermod -aG docker $(whoami)
 
 ```
-
-Step 3 : 
+Step 3 : Clone this Repo and cd path/to/the repo
+Step 4 : 
 ```bash
 docker compose up -d
 ```
