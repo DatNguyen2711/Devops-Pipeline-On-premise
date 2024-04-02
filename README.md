@@ -19,7 +19,7 @@ This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotn
 
 The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:) 
 
-Step 1: Register a ec2 instance using Ubuntu
+Step 1: Register a ec2 instance using Ubuntu ( Remember you open Inbound Rules of Instance before run the application [AWS Platform](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.console.configure-inbound-rules.html) )
 
 Step 2: Download Docker (lastest version is best)
 ```bash
@@ -52,4 +52,9 @@ Step 3 : Clone this Repo and cd path/to/the repo
 Step 4 : 
 ```bash
 docker compose up -d
+```
+Step 5:
+Go to the address:
+```bash
+http://{instance_public_IP_address}:8900
 ```
