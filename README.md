@@ -18,7 +18,9 @@ This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotn
 ## Deploy on EC2 Instance 
 
 The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:) 
+
 Step 1: Register a ec2 instance using Ubuntu
+
 Step 2: Download Docker (lastest version is best)
 ```bash
 mkdir -p /tools/docker
@@ -46,6 +48,7 @@ sudo usermod -aG docker $(whoami)
 
 ```
 Step 3 : Clone this Repo and cd path/to/the repo
+
 Step 4 : 
 ```bash
 docker compose up -d
