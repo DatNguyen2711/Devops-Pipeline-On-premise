@@ -1,32 +1,54 @@
-Pharmacy-Website
-Overview
-Pharmacy-Website là một ứng dụng web dành cho các nhà thuốc để quản lý hàng tồn kho, đơn hàng, và thông tin khách hàng. Dự án này được xây dựng với sự kết hợp giữa .NET 8, ReactJS, và SQL Server. Ứng dụng được triển khai trong một môi trường Docker và hỗ trợ việc triển khai trên hệ điều hành Linux.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Cài đặt
-Yêu cầu tiền điều kiện
-Docker và Docker Compose đã được cài đặt trên hệ thống của bạn.
-Triển khai
-Clone dự án từ repository:
-bash
-Copy code
-git clone https://github.com/yourusername/pharmacy-website.git
-Di chuyển vào thư mục dự án:
-bash
-Copy code
-cd pharmacy-website
-Sử dụng Docker Compose để triển khai dự án:
-bash
-Copy code
-docker-compose up --build
-Truy cập ứng dụng qua trình duyệt web:
-bash
-Copy code
-http://localhost:3000
-Cấu trúc thư mục
-/backend: Chứa mã nguồn backend viết bằng .NET 8.
-/frontend: Chứa mã nguồn frontend viết bằng ReactJS.
-/docker-compose.yml: Tệp cấu hình Docker Compose cho việc triển khai ứng dụng.
-Công nghệ
-Backend: .NET 8 được sử dụng để xây dựng API cho ứng dụng.
-Frontend: ReactJS được sử dụng để xây dựng giao diện người dùng của ứng dụng.
-Database: SQL Server được sử dụng làm cơ sở dữ liệu cho ứng dụng.
+## Getting Started
+
+First, run the development server:
+
+```bash
+docker compose up -d
+```
+
+Open [http://localhost:8900](http://localhost:8900) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) to write API and also ReactJS for client
+
+## Learn More
+
+
+## Deploy on EC2 Instance 
+
+The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:) 
+Step 1: Register a ec2 instance using Ubuntu
+Step 2: Download Docker (lastest version is best)
+```bash
+mkdir -p /tools/docker
+
+touch docker-install.sh && chmod +x docker-install.sh && nano docker-install.sh
+
+#!/bin/bash
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update -y
+sudo apt install docker-ce -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker -v
+docker-compose -v
+
+
+sh docker-install.sh
+
+
+sudo usermod -aG docker $(whoami)
+
+```
+
+Step 3 : 
+```bash
+docker compose up -d
+```
