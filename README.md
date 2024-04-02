@@ -19,7 +19,7 @@ This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotn
 
 The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:) 
 
-Step 1: Register a ec2 instance using Ubuntu ( Remember you open Inbound Rules of Instance before run the application [AWS Platform](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.console.configure-inbound-rules.html) )
+Step 1: Register a EC2 (T2 medium above because SQL server need 2000MB to run) instance using Ubuntu ( Remember you open Inbound Rules of Instance before run the application [AWS Platform](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.console.configure-inbound-rules.html) )
 
 Step 2: Download Docker (lastest version is best)
 ```bash
