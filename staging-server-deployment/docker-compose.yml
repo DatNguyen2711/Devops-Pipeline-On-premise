@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  back-end:
+    image: registry.datlaid-regsitry.store/pharmacy_web_backend/pharmacy-website-be:${IMAGE_TAG_BE}
+    container_name: back-end
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - db-network
+      - app-network
+    ports:
+      - "8080:8080"
+    environment:
+      - .env
+
+  front-end:
+    image: registry.datlaid-regsitry.store/pharmacy_web_frontend/pharmacy-website:${IMAGE_TAG_FE}
+    restart: always
+    ports:
+      - "8900:80"
+    depends_on:
+      - back-end
+    networks:
+      - app-network
+    environment:
+      - .env
+
+  db:
+    image: database:v1
+    build:
+      context: ./Database
+      dockerfile: Dockerfile.Database
+    container_name: db
+    restart: always
+    environment:
+      - SA_PASSWORD=DatLaid234555@Xy
+      - ACCEPT_EULA=Y
+    volumes:
+      - ./.docker/data/db:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
+    networks:
+      - db-network
+
+# docker exec -it database /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy
+networks:
+  db-network:
+    driver: bridge
+    name: db-network
+  app-network:
+    driver: bridge
+    name: app-network
