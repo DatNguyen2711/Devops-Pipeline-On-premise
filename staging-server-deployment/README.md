@@ -87,6 +87,7 @@ server {
                 proxy_cache_bypass $http_upgrade;
         }
 }
+sudo ln -s /etc/nginx/sites-available/{your_custom_project_name} /etc/nginx/sites-enabled/
 
 sudo nginx -t
 
@@ -105,6 +106,64 @@ sh get_Images_tags_BE.sh && sh get_Images_tags_FE.sh
 docker compose up -d
 ```
 
-## More
+## Bonus
 
-You can using certbot and buy an domain
+You can using certbot and buy an domain:
+
+Step 1: install certbot
+```bash
+sudo apt update
+sudo apt install snapd
+sudo snap install --classic certbot
+
+```
+
+Step 2: configure the nginx file 
+
+```bash
+
+
+sudo nano {your_custom_project_name}
+
+server {
+        listen [::]:80;
+        listen 80;
+
+        # allow upload file with size upto 500MB
+        client_max_body_size 500M;
+
+        server_name your_domain(example: datlaid.com);
+
+        location / {
+                proxy_pass http://{your_public_ip_address}:8900;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header x-forwarded-for $remote_addr;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+        }
+
+        location /api {
+                proxy_pass http://{your_public_ip_address}:8080;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header x-forwarded-for $remote_addr;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+        }
+}
+sudo ln -s /etc/nginx/sites-available/{your_custom_project_name} /etc/nginx/sites-enabled/
+
+sudo nginx -t
+
+sudo certbot --nginx -d your_domain 
+
+sudo systemctl restart nginx
+
+
+
+```
