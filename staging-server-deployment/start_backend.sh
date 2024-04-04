@@ -8,4 +8,3 @@ sed -i '/^IMAGE_TAG_BE=/s/=.*/='"$IMAGE_TAG"'/' .env
 
 # Thông báo thành công
 echo "Backend image tag đã được cập nhật thành công: $IMAGE_TAG"
-
