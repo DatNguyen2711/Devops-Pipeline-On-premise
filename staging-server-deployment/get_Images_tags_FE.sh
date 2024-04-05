@@ -1,11 +1,21 @@
 #!/bin/bash
 
+# This script fetches the list of tags for a specific repository in Harbor Registry and saves them to a text file.
+#
+# Configuration:
+# - HARBOR_SERVER: The URL of the Harbor Registry server.
+# - USERNAME: The username for authentication.
+# - PASSWORD: The password for authentication.
+# - PROJECT_NAME: The name of the project containing the repository.
+# - REPOSITORY_NAME: The name of the repository to fetch tags for.
+
 # Cấu hình thông tin
-HARBOR_SERVER="https://registry.datlaid-regsitry.store" # Thay thế <harbor_registry_server> bằng địa chỉ của Harbor Registry
+HARBOR_SERVER="https://registry.datlaid-regsitry.store"  # Thay thế <harbor_registry_server> bằng địa chỉ của Harbor Registry
 USERNAME="admin"                                        # Thay thế bằng tên người dùng của bạn
 PASSWORD="234555ax"                                     # Thay thế bằng mật khẩu của bạn
-PROJECT_NAME="pharmacy_web_frontend"
-REPOSITORY_NAME="pharmacy-website"
+PROJECT_NAME="pharmacy_web_frontend"                   # Thay thế bằng tên project của bạn
+REPOSITORY_NAME="pharmacy-website"                      # Thay thế bằng tên repository của bạn
+
 # Lấy token từ tên người dùng và mật khẩu
 TOKEN=$(echo -n "$USERNAME:$PASSWORD" | base64)
 
