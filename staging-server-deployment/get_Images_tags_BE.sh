@@ -7,12 +7,13 @@ PASSWORD="234555ax"                                     # Thay thế bằng mậ
 PROJECT_NAME="pharmacy_web_backend"
 REPOSITORY_NAME="pharmacy-website-be"
 
-# Lấy token từ tên người dùng và mật khẩu
 TOKEN=$(echo -n "$USERNAME:$PASSWORD" | base64)
 
-# Kiểm tra xem thư mục images_tag và tệp images_FE_tags.txt đã tồn tại chưa
-
-# Gửi yêu cầu API để lấy danh sách các tags của các artifacts
 response=$(curl -s -k -H "Authorization: Basic $TOKEN" "${HARBOR_SERVER}/api/v2.0/projects/${PROJECT_NAME}/repositories/${REPOSITORY_NAME}/artifacts?with_tag=true")
-# Lấy tags từ response và ghi vào file txt trong thư mục images_tag
 echo "$response" | jq -r '.[].tags[].name' >images_BE_tags.txt
+
+IMAGE_TAG=$(head -n 1 images_BE_tags.txt)
+
+sed -i '/^IMAGE_TAG_BE=/s/=.*/='"$IMAGE_TAG"'/' .env
+
+echo "Backend image tag đã được cập nhật thành công: $IMAGE_TAG"
