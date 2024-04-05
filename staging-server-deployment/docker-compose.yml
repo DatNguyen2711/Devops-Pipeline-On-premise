@@ -15,9 +15,11 @@ services:
     environment:
       - .env
 
+
   front-end:
     image: registry.datlaid-regsitry.store/pharmacy_web_frontend/pharmacy-website:${IMAGE_TAG_FE}
     restart: always
+    container_name: front-end
     ports:
       - "8900:80"
     depends_on:
@@ -26,6 +28,7 @@ services:
       - app-network
     environment:
       - .env
+
 
   db:
     image: database:v1
