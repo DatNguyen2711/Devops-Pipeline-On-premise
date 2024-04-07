@@ -8,8 +8,8 @@ REGISTRY_PROJECT_FE = 'pharmacy_web_frontend'
 // APP
 appName = 'Pharmacy_Website_datlaid'
 appUser = 'pharmacy-web'
-appType_Frontend = 'frontend'
-appType_Backend = 'backend'
+appType_Frontend = 'front_end'
+appType_Backend = 'back_end'
 DOCKER_IMAGE_FRONTEND = "${REGISTRY_URL}/${REGISTRY_PROJECT}/${appType_Frontend}"
 DOCKER_IMAGE_BACKEND = "${REGISTRY_URL}/${REGISTRY_PROJECT}/${appType_Backend}"
 
@@ -22,10 +22,10 @@ pushToRegistryBackend_production = "docker push ${DOCKER_IMAGE_BACKEND}:producti
 removeOldImage_production = "docker image rm -f ${DOCKER_IMAGE_FRONTEND}:production ${DOCKER_IMAGE_BACKEND}:production"
 
 // PROJECT FOLDER
-folderDeploy = "/jenkins-deploy/${appUser}/run" //folder chạy
-folderBackup_FrontEnd = "/jenkins-deploy/${appUser}/backups/frontend" //folder backup fe để rollback
-folderBackup_BackEnd = "/jenkins-deploy/${appUser}/backups/backend" //folder backup be để rollback
-folderMain = "/jenkins-deploy/${appUser}" //folder origin
+folderDeploy = "/home/${appUser}/project/pharmacy-website/run "     //folder chạy
+folderBackup_FrontEnd = "/home/${appUser}/project/pharmacy-website/backups/front-end" //folder backup fe để rollback
+folderBackup_BackEnd = "/home/${appUser}/project/pharmacy-website/backups/back-end" //folder backup be để rollback
+folderMain = "/home/${appUser}/project/pharmacy-website" //folder origin
 
 pathTo_Frontend = '/var/lib/jenkins/workspace/deployment-production/Pharmacy-website/pharmacy-website'
 pathTo_Backend = '/var/lib/jenkins/workspace/deployment-production/Pharmacy-website/pharmacy-website-be'
@@ -63,15 +63,15 @@ containerApp_Backend = 'server'
 containerDB = 'database'
 
 // REPO LINK
-gitLink_FrontEnd = 'http://gitlab.datnxdevops.tech/demo-fullstack-net6-vue3/fullstack-frontend.git' //link dự án
-gitLink_BackEnd = 'http://gitlab.datnxdevops.tech/demo-fullstack-net6-vue3/fullstack-backend.git'
+gitLink_FrontEnd = 'http://gitlab.datlaid.tech/jenkins/pharmacy-website.git' //link dự án
+gitLink_BackEnd = 'http://gitlab.datlaid.tech/jenkins/pharmacy-website-be.git'
 
 // START
 def startProcess() {
     stage('start') {
         sh(script: """ ${deployScript} """, label: 'deploy on staging server')
         sleep 5
-        sh(script: ""'docker ps'"", label: 'check status')
+        sh(script: ""' docker ps '"", label: 'check status')
     }
     echo('Pharmacy website with server ' + params.server + ' started')
 }
@@ -120,7 +120,6 @@ def backupProcess() {
     }
 }
 
- 
 //UPCODE
 def upcodeProcess() {
     if (params.project == 'frontend') {
@@ -140,11 +139,11 @@ def upcodeProcess() {
          stage('checkout staging branch') {
             checkout([$class: 'GitSCM', branches: [[name: params.hash ]],
                   userRemoteConfigs: [[credentialsId: 'jenkins-gitlab-user-account', url: gitLink_BackEnd]]])
-        }
+         }
         stage('build for staging') {
             sh(script: """ ${loginScript} """, label: 'login to registry')
             sh(script: ""' whoami '"", label: 'check user')
-            sh(script: """ cd ${pathTo_Backend}; ls ; ${buildBackEnd_Staging} """, label: 'build backend with Dockerfile')    
+            sh(script: """ cd ${pathTo_Backend}; ls ; ${buildBackEnd_Staging} """, label: 'build backend with Dockerfile')
             sh(script: """ ${pushToRegistryBackend_Staging} """, label: 'push new be image to registry')
             sh(script: """ ${removeOldImage_Staging} """, label: 'remove old images')
         }
@@ -158,16 +157,15 @@ def rollbackProcess() {
         stage('rollback') {
         sh(script: """ sudo su ${appUser} -c "cd ${folderDeploy}; docker image rm ${DOCKER_IMAGE_FRONTEND}:staging" """, label: 'delete the current image')
         sh(script: """ sudo su ${appUser} -c "cd ${folderBackup_FrontEnd}; docker load < ${params.rollback_version} " """, label: 'rollback process')
+        }
       }
-    }
       if (params.project == 'backend') {
         stage('rollback') {
         sh(script: """ sudo su ${appUser} -c "cd ${folderDeploy}; docker image rm ${DOCKER_IMAGE_FRONTEND}:staging" """, label: 'delete the current image')
         sh(script: """ sudo su ${appUser} -c "cd ${folderBackup_BackEnd}; docker load < ${params.rollback_version} " """, label: 'rollback process')
+        }
       }
-    }
 }
-
 
 // CHOICES
 node(params.server) {
