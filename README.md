@@ -1,5 +1,20 @@
-## Getting Started
+### Getting Started
+### Tech Stack
 
+This project utilizes the following technologies:
+
+- **.NET Core API 8**
+- **ReactJS**
+- **SQL Server**
+- **Docker**
+- **AWS EC2**
+- **Harbor Registry**
+- **Gitlab-CI**
+- **Jenkins**
+- **Ubuntu**
+- **Kubernetes**
+- **Terraform**
+- **Groovy**
 First, run the development server:
 
 ```bash

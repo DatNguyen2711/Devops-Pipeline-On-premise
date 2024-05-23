@@ -63,6 +63,9 @@ docker push  datnd2711/sqlserver:{tagname}
 Step 5: Run Application on K8S cluster
 ```bash
 
+kubectl create namespace pharmacy-app
+
+
 git clone ...
 
 cd {path_to_repo}/Kubernetes
