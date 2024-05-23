@@ -9,8 +9,8 @@ This project utilizes the following technologies:
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/docker.png" alt="Docker" width="20" height="20"> Docker**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/aws.png" alt="AWS EC2" width="20" height="20"> AWS EC2**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/harbor.png" alt="Harbor Registry" width="20" height="20"> Harbor Registry**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/gitlab.png" alt="Gitlab-CI" width="20" height="20"> Gitlab-CI**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/jenkins.png" alt="Jenkins" width="20" height="20"> Jenkins**
+- **<img src="https://castrillo.gitlab.io/figaro/runner_logo.png" alt="Gitlab-CI" width="20" height="20"> Gitlab-CI**
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jenkins_logo.svg/1200px-Jenkins_logo.svg.png" alt="Jenkins" width="20" height="20"> Jenkins**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/ubuntu.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/kubernetes.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/terraform.png" alt="Terraform" width="20" height="20"> Terraform**
