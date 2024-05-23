@@ -4,17 +4,17 @@
 This project utilizes the following technologies:
 
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET Core API 8" width="20" height="20"> .NET Core API 8**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/react.png" alt="ReactJS" width="20" height="20"> ReactJS**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/sqlserver.png" alt="SQL Server" width="20" height="20"> SQL Server**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/docker.png" alt="Docker" width="20" height="20"> Docker**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/aws.png" alt="AWS EC2" width="20" height="20"> AWS EC2**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/harbor.png" alt="Harbor Registry" width="20" height="20"> Harbor Registry**
+- **<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcBiBI248rgjtRfFgxc8WapC-w7npSGPi6GnV1_VUMww&s" alt="ReactJS" width="20" height="20"> ReactJS**
+- **<img src="https://viettelidc.com.vn//uploadimage/Root/root/06-01-toan-tap-ve-sql-server-cho-nguoi-moi-bat-dau.jpg" alt="SQL Server" width="20" height="20"> SQL Server**
+- **<img src="https://techvccloud.mediacdn.vn/2018/7/13/docker-1531468887078532266614-0-14-400-726-crop-15314688919081778546108.png" alt="Docker" width="20" height="20"> Docker**
+- **<img src="https://www.logicata.com/wp-content/uploads/2020/08/Amazon-EC2@4x-e1593195270371.png" alt="AWS EC2" width="20" height="20"> AWS EC2**
+- **<img src="https://static-00.iconduck.com/assets.00/harbor-icon-1018x1024-15bgc40q.png" alt="Harbor Registry" width="20" height="20"> Harbor Registry**
 - **<img src="https://castrillo.gitlab.io/figaro/runner_logo.png" alt="Gitlab-CI" width="20" height="20"> Gitlab-CI**
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jenkins_logo.svg/1200px-Jenkins_logo.svg.png" alt="Jenkins" width="20" height="20"> Jenkins**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/ubuntu.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/kubernetes.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/terraform.png" alt="Terraform" width="20" height="20"> Terraform**
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/groovy.png" alt="Groovy" width="20" height="20"> Groovy**
+- **<img src="https://manhha.dev/content/images/2022/03/00-featured-image-1.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
+- **<img src="https://encore.dev/assets/resources/kubernetes_cover.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
+- **<img src="https://www.aviator.co/blog/wp-content/uploads/2023/01/terraform.png" alt="Terraform" width="20" height="20"> Terraform**
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
 
 
 # First, run the development server:
