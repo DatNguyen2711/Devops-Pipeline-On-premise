@@ -1,5 +1,3 @@
-# Getting Started
-
 # Tech Stack
 
 This project utilizes the following technologies:
@@ -14,11 +12,12 @@ This project utilizes the following technologies:
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jenkins_logo.svg/1200px-Jenkins_logo.svg.png" alt="Jenkins" width="20" height="20"> Jenkins**
 - **<img src="https://manhha.dev/content/images/2022/03/00-featured-image-1.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
 - **<img src="https://encore.dev/assets/resources/kubernetes_cover.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
-- **<img src="https://www.aviator.co/blog/wp-content/uploads/2023/01/terraform.png" alt="Terraform" width="20" height="20"> Terraform**
+- **<img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/77befea2-7041-4c6c-9ec7-d75bb60b21c6.png" alt="Terraform" width="20" height="20"> Terraform**
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
 
+# Getting Started
 
-# First, run the development server:
+## First, run the development server:
 
 ```bash
 docker compose up -d
