@@ -3,19 +3,21 @@
 
 This project utilizes the following technologies:
 
-- **.NET Core API 8**
-- **ReactJS**
-- **SQL Server**
-- **Docker**
-- **AWS EC2**
-- **Harbor Registry**
-- **Gitlab-CI**
-- **Jenkins**
-- **Ubuntu**
-- **Kubernetes**
-- **Terraform**
-- **Groovy**
-First, run the development server:
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/dotnet.png" alt=".NET Core API 8" width="20" height="20"> .NET Core API 8**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/react.png" alt="ReactJS" width="20" height="20"> ReactJS**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/sqlserver.png" alt="SQL Server" width="20" height="20"> SQL Server**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/docker.png" alt="Docker" width="20" height="20"> Docker**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/aws.png" alt="AWS EC2" width="20" height="20"> AWS EC2**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/harbor.png" alt="Harbor Registry" width="20" height="20"> Harbor Registry**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/gitlab.png" alt="Gitlab-CI" width="20" height="20"> Gitlab-CI**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/jenkins.png" alt="Jenkins" width="20" height="20"> Jenkins**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/ubuntu.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/kubernetes.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/terraform.png" alt="Terraform" width="20" height="20"> Terraform**
+- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/groovy.png" alt="Groovy" width="20" height="20"> Groovy**
+
+
+# First, run the development server:
 
 ```bash
 docker compose up -d
