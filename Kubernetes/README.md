@@ -1,17 +1,17 @@
-## Getting Started
-
-## Running application on K8S cluster
+### Running application on K8S cluster
 
 Step 1: First, config the ConnectionStrings at back-end
 
 ```bash
-
     "ConnectionStrings": {
       "MyDb": "Server=sqlserver.pharmacy-app.svc.cluster.local,1433; Database=MedicineWeb; User Id=sa; Password=DatLaid234555@Xy; MultipleActiveResultSets=true; TrustServerCertificate=True"
-
   },
+```
 
-  And also edit the context file ProjectPrn231Context.cs
+And also edit the context file ProjectPrn231Context.cs
+
+```bash
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=sqlserver.pharmacy-app.svc.cluster.local,1433; Database=MedicineWeb; User Id=sa; Password=DatLaid234555@Xy; MultipleActiveResultSets=true; TrustServerCertificate=True");
 
@@ -19,6 +19,7 @@ Step 1: First, config the ConnectionStrings at back-end
 ```
 
 Step 2: Build image for back-end
+
 ```bash
 cd Medicine-Web
 
@@ -32,22 +33,20 @@ docker push datnd2711/pharmacy-be:tagname
 
 Step 3: Build image for front-end
 
-Config the .env 
+Config the .env
+
 ```bash
 
 
 ```
-
-
 
 ```bash
 docker build -t fe:v1 .
 
-docker tag fe:v1 datnd2711/pharmacy-fe:tagname
+docker tag fe:v1 datnd2711/pharmacy-fe:{tag_name}
 
-docker push dat
+docker push datnd2711/pharmacy-fe:{tag_name}
 ```
-
 
 Step 4: build image cho Database
 
@@ -60,4 +59,13 @@ docker tag db:{tag_name} datnd2711/sqlserver:{tagname}
 
 docker push  datnd2711/sqlserver:{tagname}
 
+```
+Step 5: Run Application on K8S cluster
+```bash
+
+git clone ...
+
+cd {path_to_repo}/Kubernetes
+
+kubectl apply -f .
 ```
