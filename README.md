@@ -3,7 +3,7 @@
 
 This project utilizes the following technologies:
 
-- **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/dotnet.png" alt=".NET Core API 8" width="20" height="20"> .NET Core API 8**
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET Core API 8" width="20" height="20"> .NET Core API 8**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/react.png" alt="ReactJS" width="20" height="20"> ReactJS**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/sqlserver.png" alt="SQL Server" width="20" height="20"> SQL Server**
 - **<img src="https://github.com/DatNguyen2711/Pharmacy-Web/assets/tech-icons/docker.png" alt="Docker" width="20" height="20"> Docker**
