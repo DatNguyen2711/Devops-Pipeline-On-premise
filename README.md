@@ -1,5 +1,6 @@
-### Getting Started
-### Tech Stack
+# Getting Started
+
+# Tech Stack
 
 This project utilizes the following technologies:
 
