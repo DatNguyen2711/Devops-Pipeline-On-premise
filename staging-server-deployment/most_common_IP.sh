@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is to display the most common IP address sent request to your application
+
 # Kiểm tra xem file access.log có tồn tại không
 if [ ! -f "/path/to/access.log" ]; then
     echo "File access.log không tồn tại."
