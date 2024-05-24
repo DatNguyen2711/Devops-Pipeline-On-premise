@@ -5,7 +5,7 @@ echo "Starting SQL Server..."
 /opt/mssql/bin/sqlservr &
 
 # Wait for SQL Server to start up
-sleep 40
+# sleep 40
 
 echo "Attaching database..."
 if /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy -i /dbconfig/init.sql; then
