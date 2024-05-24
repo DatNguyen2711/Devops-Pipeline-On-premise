@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: pharmacy-app
+  name: front-end
+  labels:
+    component: front-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: front-end
+  template:
+    metadata:
+      labels:
+        component: front-end
+    spec:
+      containers:
+      - name: front-end
+        image: datnd2711/pharmacy-fe:v2
+        ports:
+        - containerPort: 80
+          name: http-frontend
+      imagePullSecrets:
+      - name: my-dockerhub-secret

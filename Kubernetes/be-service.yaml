@@ -8,7 +8,8 @@ spec:
     component: back-end
   type: NodePort
   ports:
-  - name: http
+  - name: http-be
     protocol: TCP
     port: 8080
     targetPort: http-backend
+    nodePort: 31843
