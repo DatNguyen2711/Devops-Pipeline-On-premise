@@ -17,14 +17,19 @@ spec:
     spec:
       containers:
       - name: sqlserver
-        image: datnd2711/sqlserver:v14
+        image: datnd2711/sqlserver:v16
         ports:
         - containerPort: 1433
         volumeMounts:
         - mountPath: /var/opt/mssql/data
           name: sqlserver-data
-      imagePullSecrets:
-      - name: my-dockerhub-secret
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
         env:
         - name: MSSQL_SA_PASSWORD
           valueFrom:
@@ -36,7 +41,8 @@ spec:
         command: ["/bin/bash", "-c"]
         args:
         - "/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"
-
+      imagePullSecrets:
+      - name: my-dockerhub-secret
   volumeClaimTemplates:
   - metadata:
       name: sqlserver-data
