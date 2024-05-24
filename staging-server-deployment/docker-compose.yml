@@ -47,7 +47,7 @@ services:
     networks:
       - db-network
 
-# docker exec -it database /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy
+# docker exec -it db /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy
 networks:
   db-network:
     driver: bridge
