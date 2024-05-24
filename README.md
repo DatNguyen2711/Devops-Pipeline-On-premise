@@ -65,7 +65,9 @@ sudo usermod -aG docker $(whoami)
 
 ```
 Step 3 : Clone this Repo and cd path/to/the repo
+
 Step 4 : Go to Front-end source and change the Ip Address in .env file to you instance public IP
+
 Step 4 : 
 ```bash
 docker compose up -d
