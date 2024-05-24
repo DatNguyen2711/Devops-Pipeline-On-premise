@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Cấu hình thông tin
-HARBOR_SERVER="https://registry.datlaid-regsitry.store" # Thay thế <harbor_registry_server> bằng địa chỉ của Harbor Registry
-USERNAME="admin"                                        # Thay thế bằng tên người dùng của bạn
-PASSWORD="234555ax"                                     # Thay thế bằng mật khẩu của bạn
+# information config
+HARBOR_SERVER="https://registry.datlaid-regsitry.store" # Replace <harbor_registry_server> with your Harbor Registry address
+USERNAME="admin"                                        # Replace by your account name
+PASSWORD="234555ax"                                     # Replace by your password
 PROJECT_NAME="pharmacy_web_backend"
 REPOSITORY_NAME="pharmacy-website-be"
 
@@ -16,4 +16,4 @@ IMAGE_TAG=$(head -n 1 images_BE_tags.txt)
 
 sed -i '/^IMAGE_TAG_BE=/s/=.*/='"$IMAGE_TAG"'/' .env
 
-echo "Backend image tag đã được cập nhật thành công: $IMAGE_TAG"
+echo "Backend image tag updated successfully: $IMAGE_TAG"
