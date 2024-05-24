@@ -42,6 +42,7 @@ Step 4 :
 docker login -u admin -p 234555ax https://registry.datlaid-regsitry.store/
 
 ```
+## Note: I deleted my registry so you guys have to create a new one :)))) Sorry about that
 
 Step 5 : Install Nginx
 
@@ -166,4 +167,3 @@ sudo systemctl restart nginx
 
 
 ```
-_Note: I deleted my registry so you guys have to create a new one :)))) Sorry about that_
