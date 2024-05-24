@@ -164,6 +164,6 @@ sudo certbot --nginx -d your_domain
 
 sudo systemctl restart nginx
 
-_Note: I deleted my registry so you guys have to create a new one :)))) Sorry about that_
 
 ```
+_Note: I deleted my registry so you guys have to create a new one :)))) Sorry about that_
