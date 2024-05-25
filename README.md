@@ -95,15 +95,15 @@ then name your tag, here is your access key
 ![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/9bf0abe7-6155-4b7a-9843-1d045ef6177b)
 
 
-Step 3: Paste into main.tf file at provider
+Step 3: Configure aws key in your local machine
 
 ```bash
-provider "aws" {
-  region     = "ap-southeast-1"
-  access_key = "Your access key"
-  secret_key = "Your secret key"
-}
+aws configure
 
+
+----
+AWS Access Key ID [****************PAWK]: ************
+AWS Secret Access Key [****************tz1d]: ***************
 ```
 
 Step 4: Run this command to create and running EC2 Instance
