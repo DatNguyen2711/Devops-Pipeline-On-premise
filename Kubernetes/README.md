@@ -1,5 +1,11 @@
 ### Running application on K8S cluster
 
+### Tech using
+
+*VMWare*
+*MetalLB*
+*Ingress Controller*
+
 Step 1: First, config the ConnectionStrings at back-end
 
 ```bash
