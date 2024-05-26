@@ -6,7 +6,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx # Nếu bạn không muốn dùng annotations
+  ingressClassName: nginx # if you don't want to use annotations
   rules:
   - host: demo.datlaid.com
     http:
