@@ -1,4 +1,4 @@
-## Running application on K8S cluster
+## Running Application On Kubernetes Cluster
 
 ### Tech using
 
@@ -7,6 +7,10 @@
 *MetalLB*
 
 *Ingress Controller*
+
+*NFS Server*
+
+*Cri-o*
 
 Step 1: First, config the ConnectionStrings at back-end
 
@@ -41,12 +45,8 @@ docker push datnd2711/pharmacy-be:tagname
 
 Step 3: Build image for front-end
 
-Config the .env
+Config the .env with your back-end service in your cluster (basically we using NodePort service)
 
-```bash
-
-
-```
 
 ```bash
 docker build -t fe:v1 .
@@ -56,7 +56,7 @@ docker tag fe:v1 datnd2711/pharmacy-fe:{tag_name}
 docker push datnd2711/pharmacy-fe:{tag_name}
 ```
 
-Step 4: build image cho Database
+Step 4: Build image cho Database
 
 ```bash
 cd Database
