@@ -6,10 +6,10 @@ metadata:
 spec:
   selector:
     component: front-end
-  type: NodePort
+  type: LoadBalancer
   ports:
   - name: http-fe
     protocol: TCP
     port: 80
     targetPort: http-frontend
-    nodePort: 32000
+    # nodePort: 32000
