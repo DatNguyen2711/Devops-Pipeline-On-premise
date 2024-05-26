@@ -1,4 +1,4 @@
-### Running application on K8S cluster
+## Running application on K8S cluster
 
 ### Tech using
 
