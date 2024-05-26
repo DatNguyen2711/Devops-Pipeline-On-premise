@@ -80,3 +80,6 @@ cd {path_to_repo}/Kubernetes
 
 kubectl apply -f .
 ```
+## If you want to know how to set up NFS server, K8S-Cluster bare metal (Vmware) and MetalLB Nginx Ingress
+
+### **[Access to my Notion](https://www.notion.so/datlaid/268200cd12cb4226834648f298512d44?v=cc87800a59da4616838c8f10919aebfb&pvs=4)**
