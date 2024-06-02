@@ -1,0 +1,86 @@
+namespace: pharmacy-app
+
+backEnd:
+  replicaCount: 3
+  image:
+    repository: datnd2711/pharmacy-be
+    tag: v3
+    pullPolicy: IfNotPresent
+  imagePullSecrets:
+    name: my-dockerhub-secret
+  service:
+    name: back-end-service
+    type: ClusterIP
+    port: 8080
+    targetPort: http-backend
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+
+frontEnd:
+  replicaCount: 2
+  image:
+    repository: datnd2711/pharmacy-fe
+    tag: v5
+    pullPolicy: IfNotPresent
+  imagePullSecrets:
+    name: my-dockerhub-secret
+  service:
+    name: front-end-service
+    type: ClusterIP
+    port: 80
+    targetPort: http-frontend
+
+sqlserver:
+  image:
+    repository: datnd2711/sqlserver
+    tag: v16
+    pullPolicy: IfNotPresent
+  imagePullSecrets:
+    name: my-dockerhub-secret
+  service:
+    name: sqlserver
+    port: 1433
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+  volume:
+    storageClassName: nfs-client
+    size: 3Gi
+  secret:
+    name: sqlserver-secret
+    MSSQL_SA_PASSWORD: RGF0TGFpZDIzNDU1NUBYeQ==
+  command: ["/bin/bash", "-c"]
+  args: ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
+
+
+ingress:
+  name: pharmacy-ingress
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - demo.datlaid.com
+    secretName: pharmacy-app
+  rules:
+  - host: demo.datlaid.com
+    paths:
+    - path: /
+      pathType: Prefix
+      backend:
+        serviceName: front-end-service
+        servicePort: http-fe
+    - path: /api
+      pathType: Prefix
+      backend:
+        serviceName: back-end-service
+        servicePort: http-be
