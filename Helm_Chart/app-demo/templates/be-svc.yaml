@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {? {.Values.backEnd.service.name: ''} : ''}
+  namespace: {? {.Values.namespace: ''} : ''}
+spec:
+  selector:
+    component: back-end
+  type: {? {.Values.backEnd.service.type: ''} : ''}
+  ports:
+  - name: http-be
+    protocol: TCP
+    port: {? {.Values.backEnd.service.port: ''} : ''}
+    targetPort: {? {.Values.backEnd.service.targetPort: ''} : ''}
+    # nodePort: 31843

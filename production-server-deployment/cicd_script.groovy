@@ -61,9 +61,9 @@ deployAfterRollBackScript = """
              """
 
 // CONTAINER
-containerApp_Frontend = 'client'
-containerApp_Backend = 'server'
-containerDB = 'database'
+containerApp_Frontend = 'front-end'
+containerApp_Backend = 'back-end'
+containerDB = 'db'
 // REPO LINK
 gitLink_FrontEnd = 'http://192.168.216.192/jenkins/pharmacy-website.git' //link dự án
 gitLink_BackEnd = 'http://192.168.216.192/jenkins/pharmacy-website-be.git'

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {? {.Values.name | default "pharmacy-app": ''} : ''}
+  name: {? {.Values.sqlserver.service.name: ''} : ''}
+  labels:
+    component: sqlserver
+spec:
+  selector:
+    matchLabels:
+      component: sqlserver
+  serviceName: {? {.Values.sqlserver.service.name: ''} : ''}
+  template:
+    metadata:
+      labels:
+        component: sqlserver
+    spec:
+      containers:
+      - name: sqlserver
+        image: "{{ .Values.sqlserver.image.repository }}:{{ .Values.sqlserver.image.tag }}"
+        ports:
+        - containerPort: {? {.Values.sqlserver.service.port: ''} : ''}
+        volumeMounts:
+        - mountPath: /var/opt/mssql/data
+          name: sqlserver-data
+        resources:
+          requests:
+            cpu: "{{ .Values.sqlserver.resources.requests.cpu }}"
+            memory: "{{ .Values.sqlserver.resources.requests.memory }}"
+          limits:
+            cpu: "{{ .Values.sqlserver.resources.limits.cpu }}"
+            memory: "{{ .Values.sqlserver.resources.limits.memory }}"
+        env:
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {? {.Values.sqlserver.secret.name: ''} : ''}
+              key: MSSQL_SA_PASSWORD
+        - name: ACCEPT_EULA
+          value: "Y"
+        command: {? {.Values.sqlserver.command | toJson: ''} : ''}
+        args: {? {.Values.sqlserver.args | toJson: ''} : ''}
+      imagePullSecrets:
+      - name: {? {.Values.sqlserver.imagePullSecrets.name: ''} : ''}
+  volumeClaimTemplates:
+  - metadata:
+      name: sqlserver-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: {? {.Values.sqlserver.volume.storageClassName: ''} : ''}
+      resources:
+        requests:
+          storage: {? {.Values.sqlserver.volume.size: ''} : ''}

@@ -1,6 +1,24 @@
-## Getting Started
+# Tech Stack
 
-First, run the development server:
+This project utilizes the following technologies:
+
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg" alt=".NET Core API 8" width="20" height="20"> .NET Core API 8**
+- **<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcBiBI248rgjtRfFgxc8WapC-w7npSGPi6GnV1_VUMww&s" alt="ReactJS" width="20" height="20"> ReactJS**
+- **<img src="https://viettelidc.com.vn//uploadimage/Root/root/06-01-toan-tap-ve-sql-server-cho-nguoi-moi-bat-dau.jpg" alt="SQL Server" width="20" height="20"> SQL Server**
+- **<img src="https://techvccloud.mediacdn.vn/2018/7/13/docker-1531468887078532266614-0-14-400-726-crop-15314688919081778546108.png" alt="Docker" width="20" height="20"> Docker**
+- **<img src="https://www.logicata.com/wp-content/uploads/2020/08/Amazon-EC2@4x-e1593195270371.png" alt="AWS EC2" width="20" height="20"> AWS EC2**
+- **<img src="https://static-00.iconduck.com/assets.00/harbor-icon-1018x1024-15bgc40q.png" alt="Harbor Registry" width="20" height="20"> Harbor Registry**
+- **<img src="https://castrillo.gitlab.io/figaro/runner_logo.png" alt="Gitlab-CI" width="20" height="20"> Gitlab-CI**
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jenkins_logo.svg/1200px-Jenkins_logo.svg.png" alt="Jenkins" width="20" height="20"> Jenkins**
+- **<img src="https://manhha.dev/content/images/2022/03/00-featured-image-1.png" alt="Ubuntu" width="20" height="20"> Ubuntu**
+- **<img src="https://encore.dev/assets/resources/kubernetes_cover.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
+- **<img src="https://encore.dev/assets/resources/terraform_cover.png" alt="Terraform" width="20" height="20"> Terraform**
+- **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
+- **<img src="https://andrewlock.net/content/images/2019/helm.png" alt="Groovy" width="20" height="20"> Helm**
+
+# Getting Started
+
+## First, run the development server:
 
 ```bash
 docker compose up -d
@@ -48,15 +66,54 @@ sudo usermod -aG docker $(whoami)
 
 ```
 Step 3 : Clone this Repo and cd path/to/the repo
-Step 4 : Go to Front-end source and change the Ip Address in .env file to you instance public IP
-Step 4 : 
 ```bash
 docker compose up -d
 ```
-Step 5:
+Step 4:
 Go to the address:
 ```bash
 http://{instance_public_IP_address}:8900
 ```
 ## More
 You can using certbot and buy an domain 
+
+## Create EC2 Instance with Terraform
+![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/b8fc4c6e-9102-43a1-8890-caffc5acf6ed)
+
+Step 1: First, run you have to create AWS account and IAM user account
+
+Open [IAM AWS docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) to see how to create AWS account and IAM user
+
+Step 2: Attach to IAM user policies such as : AdministratorAccess (you can using only Administrator ec2 policies)
+
+Click to the user then select security credentials and then follow the instructions to create access key for IAM
+user (follow to the bellow instructions)
+![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/cbeee82a-e05b-4449-ab5a-fd450cbb51f1)
+then...
+![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/e738ac15-12a3-406b-aad9-6cda8c7c84b9)
+![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/fb448382-f8d7-413b-9f9f-8c0f110daa6d)
+then name your tag, here is your access key
+![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/9bf0abe7-6155-4b7a-9843-1d045ef6177b)
+
+
+Step 3: Configure aws key in your local machine
+
+```bash
+aws configure
+
+
+----
+AWS Access Key ID [****************PAWK]: ************
+AWS Secret Access Key [****************tz1d]: ***************
+```
+
+Step 4: Run this command to create and running EC2 Instance
+
+```bash
+terraform init
+
+terraform plan
+
+terraform apply --auto-approve
+
+```

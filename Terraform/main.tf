@@ -8,11 +8,9 @@ terraform {
 }
 
 provider "aws" {
-  region     = "ap-southeast-1"
-  access_key = "AKIA6GBMG5EXUL4PPS5Z"
-  secret_key = "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"
+  region  = "ap-southeast-1"
+  profile = "default" # Tên profile trong file credentials chứa access key và secret key
 }
-
 
 resource "tls_private_key" "rsa_4096" {
   algorithm = "RSA"

@@ -10,11 +10,11 @@
 # - REPOSITORY_NAME: The name of the repository to fetch tags for.
 
 # Cấu hình thông tin
-HARBOR_SERVER="https://registry.datlaid-regsitry.store" # Thay thế <harbor_registry_server> bằng địa chỉ của Harbor Registry
-USERNAME="admin"                                        # Thay thế bằng tên người dùng của bạn
-PASSWORD="234555ax"                                     # Thay thế bằng mật khẩu của bạn
-PROJECT_NAME="pharmacy_web_frontend"                    # Thay thế bằng tên project của bạn
-REPOSITORY_NAME="pharmacy-website"                      # Thay thế bằng tên repository của bạn
+HARBOR_SERVER="https://registry.datlaid-regsitry.store" 
+USERNAME="admin"                                      
+PASSWORD="234555ax"                                   
+PROJECT_NAME="pharmacy_web_frontend"                 
+REPOSITORY_NAME="pharmacy-website"                   
 
 TOKEN=$(echo -n "$USERNAME:$PASSWORD" | base64)
 
@@ -26,4 +26,4 @@ IMAGE_TAG=$(head -n 1 images_FE_tags.txt)
 
 sed -i '/^IMAGE_TAG_FE=/s/=.*/='"$IMAGE_TAG"'/' .env
 
-echo "Frontend image tag đã được cập nhật thành công: $IMAGE_TAG"
+echo "Frontend image tag updated successfully: $IMAGE_TAG"
