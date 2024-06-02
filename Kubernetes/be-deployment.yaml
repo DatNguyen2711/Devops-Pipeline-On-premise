@@ -6,7 +6,7 @@ metadata:
   labels:
     component: back-end
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       component: back-end
@@ -16,17 +16,17 @@ spec:
         component: back-end
     spec:
       containers:
-        - name: back-end
-          image: datnd2711/pharmacy-be:v3
-          ports:
-            - containerPort: 8080
-              name: http-backend
-          resources:
-            requests:
-              cpu: 500m
-              memory: 512Mi
-            limits:
-              cpu: '1'
-              memory: 1Gi
+      - name: back-end
+        image: datnd2711/pharmacy-be:v3
+        ports:
+        - containerPort: 8080
+          name: http-backend
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
       imagePullSecrets:
-        - name: my-dockerhub-secret
+      - name: my-dockerhub-secret

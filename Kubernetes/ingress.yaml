@@ -4,9 +4,14 @@ metadata:
   name: pharmacy-ingress
   namespace: pharmacy-app
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/issuer: "letsencrypt-prod"
+
 spec:
-  ingressClassName: nginx # if you don't want to use annotations
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - demo.datlaid.com
+    secretName: pharmacy-app
   rules:
   - host: demo.datlaid.com
     http:
