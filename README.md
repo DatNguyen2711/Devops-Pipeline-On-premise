@@ -14,6 +14,7 @@ This project utilizes the following technologies:
 - **<img src="https://encore.dev/assets/resources/kubernetes_cover.png" alt="Kubernetes" width="20" height="20"> Kubernetes**
 - **<img src="https://encore.dev/assets/resources/terraform_cover.png" alt="Terraform" width="20" height="20"> Terraform**
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
+- **<img src="https://andrewlock.net/content/images/2019/helm.png" alt="Groovy" width="20" height="20"> Helm**
 
 # Getting Started
 
