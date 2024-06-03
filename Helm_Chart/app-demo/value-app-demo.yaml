@@ -1,7 +1,8 @@
-namespace: pharmacy-app
+namespace: test-helm
 
 backEnd:
   replicaCount: 3
+  name: back-end
   image:
     repository: datnd2711/pharmacy-be
     tag: v3
@@ -12,7 +13,7 @@ backEnd:
     name: back-end-service
     type: ClusterIP
     port: 8080
-    targetPort: http-backend
+    targetPort: 8080 # ensure this is an integer
   resources:
     requests:
       cpu: "250m"
@@ -23,6 +24,7 @@ backEnd:
 
 frontEnd:
   replicaCount: 2
+  name: front-end
   image:
     repository: datnd2711/pharmacy-fe
     tag: v5
@@ -33,12 +35,19 @@ frontEnd:
     name: front-end-service
     type: ClusterIP
     port: 80
-    targetPort: http-frontend
+    targetPort: 80 # ensure this is an integer
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
 
 sqlserver:
   image:
     repository: datnd2711/sqlserver
-    tag: v16
+    tag: v19
     pullPolicy: IfNotPresent
   imagePullSecrets:
     name: my-dockerhub-secret
@@ -58,11 +67,12 @@ sqlserver:
   secret:
     name: sqlserver-secret
     MSSQL_SA_PASSWORD: RGF0TGFpZDIzNDU1NUBYeQ==
-  command: ["/bin/bash", "-c"]
-  args: ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
+    # command: ["/bin/bash", "-c"]
+# args: ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
 
 
 ingress:
+
   name: pharmacy-ingress
   annotations:
     cert-manager.io/issuer: "letsencrypt-prod"
@@ -84,3 +94,50 @@ ingress:
       backend:
         serviceName: back-end-service
         servicePort: http-be
+
+certManager:
+  issuer:
+    enabled: true
+    name: letsencrypt-prod
+    namespace: test-helm
+    email: datlaid@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretName: letsencrypt-prod
+    solvers:
+    - http01:
+        ingressClass: nginx
+
+hpa:
+  enabled: true
+  name: autoscale-hpa
+  namespace: test-helm
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: back-end
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown:
+      policies:
+      - periodSeconds: 60
+        type: Pods
+        value: 3
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+      stabilizationWindowSeconds: 200
+
+
+resourceQuota:
+  cpuRequests: "1.5"
+  memoryRequests: "2.5Gi"
+  cpuLimits: "3"
+  memoryLimits: "5Gi"
