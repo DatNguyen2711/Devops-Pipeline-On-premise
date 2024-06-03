@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.backEnd.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.backEnd.name }}
+spec:
+  type: {{ .Values.backEnd.service.type }}
+  ports:
+    - port: {{ .Values.backEnd.service.port }}
+      targetPort: {{ .Values.backEnd.service.targetPort }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.backEnd.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.frontEnd.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.frontEnd.name }}
+spec:
+  type: {{ .Values.frontEnd.service.type }}
+  ports:
+    - port: {{ .Values.frontEnd.service.port }}
+      targetPort: {{ .Values.frontEnd.service.targetPort }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.frontEnd.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.sqlserver.service.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.sqlserver.service.name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.sqlserver.service.port }}
+      targetPort: {{ .Values.sqlserver.service.port }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.sqlserver.service.name }}

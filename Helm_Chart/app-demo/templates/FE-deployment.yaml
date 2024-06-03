@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {? {.Values.name | default "pharmacy-app": ''} : ''}
-  name: {? {.Values.name | default "front-end": ''} : ''}
+  name: {{ .Values.frontEnd.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    component: front-end
+    app: {{ .Values.frontEnd.name }}
 spec:
-  replicas: {? {.Values.frontEnd.replicaCount: ''} : ''}
+  replicas: {{ .Values.frontEnd.replicaCount }}
   selector:
     matchLabels:
-      component: front-end
+      app: {{ .Values.frontEnd.name }}
   template:
     metadata:
       labels:
-        component: front-end
+        app: {{ .Values.frontEnd.name }}
     spec:
       containers:
-      - name: front-end
-        image: "{{ .Values.frontEnd.image.repository }}:{{ .Values.frontEnd.image.tag }}"
-        ports:
-        - containerPort: {? {.Values.frontEnd.service.port: ''} : ''}
-          name: {? {.Values.frontEnd.service.name: ''} : ''}
+        - name: {{ .Values.frontEnd.name }}
+          image: {{ .Values.frontEnd.image.repository }}:{{ .Values.frontEnd.image.tag }}
+          imagePullPolicy: {{ .Values.frontEnd.image.pullPolicy }}
+          ports:
+            - name: http-frontend
+              containerPort: {{ .Values.frontEnd.service.targetPort }}
+          resources:
+            requests:
+              cpu: {{ .Values.frontEnd.resources.requests.cpu }}
+              memory: {{ .Values.frontEnd.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.frontEnd.resources.limits.cpu }}
+              memory: {{ .Values.frontEnd.resources.limits.memory }}
       imagePullSecrets:
-      - name: {? {.Values.frontEnd.imagePullSecrets.name: ''} : ''}
+        - name: {{ .Values.frontEnd.imagePullSecrets.name }}

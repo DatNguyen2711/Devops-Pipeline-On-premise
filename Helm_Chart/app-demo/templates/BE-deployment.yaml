@@ -1,32 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {? {.Values.name | default "pharmacy-app": ''} : ''}
-  name: {? {.Values.sqlserver.service.name: 'back-end'} : ''}
+  name: {{ .Values.backEnd.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    component: back-end
+    app: {{ .Values.backEnd.name }}
 spec:
-  replicas: {? {.Values.backEnd.replicaCount: ''} : ''}
+  replicas: {{ .Values.backEnd.replicaCount }}
   selector:
     matchLabels:
-      component: back-end
+      app: {{ .Values.backEnd.name }}
   template:
     metadata:
       labels:
-        component: back-end
+        app: {{ .Values.backEnd.name }}
     spec:
       containers:
-      - name: back-end
-        image: "{{ .Values.backEnd.image.repository }}:{{ .Values.backEnd.image.tag }}"
-        ports:
-        - containerPort: {? {.Values.backEnd.service.port: ''} : ''}
-          name: {? {.Values.backEnd.service.name: ''} : ''}
-        resources:
-          requests:
-            cpu: "{{ .Values.backEnd.resources.requests.cpu }}"
-            memory: "{{ .Values.backEnd.resources.requests.memory }}"
-          limits:
-            cpu: "{{ .Values.backEnd.resources.limits.cpu }}"
-            memory: "{{ .Values.backEnd.resources.limits.memory }}"
+        - name: {{ .Values.backEnd.name }}
+          image: {{ .Values.backEnd.image.repository }}:{{ .Values.backEnd.image.tag }}
+          imagePullPolicy: {{ .Values.backEnd.image.pullPolicy }}
+          ports:
+            - name: http-backend
+              containerPort: {{ .Values.backEnd.service.targetPort }}
+          resources:
+            requests:
+              cpu: {{ .Values.backEnd.resources.requests.cpu }}
+              memory: {{ .Values.backEnd.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.backEnd.resources.limits.cpu }}
+              memory: {{ .Values.backEnd.resources.limits.memory }}
       imagePullSecrets:
-      - name: {? {.Values.backEnd.imagePullSecrets.name: ''} : ''}
+        - name: {{ .Values.backEnd.imagePullSecrets.name }}

@@ -2,25 +2,29 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.namespace | default "test-helm" }}
   annotations:
     {{- range $key, $value := .Values.ingress.annotations }}
       {{ $key }}: {{ $value | quote }}
     {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}
+  {{- if .Values.ingress.tls }}
   tls:
-  - hosts:
-    {{- range .Values.ingress.tls[0].hosts }}
-    - {{ . }}
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . }}
+        {{- end }}
+      secretName: {{ .secretName }}
     {{- end }}
-    secretName: {{ .Values.ingress.tls[0].secretName }}
+  {{- end }}
   rules:
-  {{- range .Values.ingress.rules }}
+    {{- range .Values.ingress.rules }}
   - host: {{ .host }}
     http:
       paths:
-      {{- range .paths }}
+        {{- range .paths }}
       - path: {{ .path }}
         pathType: {{ .pathType }}
         backend:
@@ -28,5 +32,5 @@ spec:
             name: {{ .backend.serviceName }}
             port:
               name: {{ .backend.servicePort }}
-      {{- end }}
-  {{- end }}
+        {{- end }}
+    {{- end }}

@@ -1,54 +1,52 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: {? {.Values.name | default "pharmacy-app": ''} : ''}
-  name: {? {.Values.sqlserver.service.name: ''} : ''}
+  name: {{ .Values.sqlserver.service.name }}
+  namespace: {{ .Values.namespace }}
   labels:
-    component: sqlserver
+    app: {{ .Values.sqlserver.service.name }}
 spec:
+  serviceName: {{ .Values.sqlserver.service.name }}
+  replicas: 1
   selector:
     matchLabels:
-      component: sqlserver
-  serviceName: {? {.Values.sqlserver.service.name: ''} : ''}
+      app: {{ .Values.sqlserver.service.name }}
   template:
     metadata:
       labels:
-        component: sqlserver
+        app: {{ .Values.sqlserver.service.name }}
     spec:
       containers:
-      - name: sqlserver
-        image: "{{ .Values.sqlserver.image.repository }}:{{ .Values.sqlserver.image.tag }}"
-        ports:
-        - containerPort: {? {.Values.sqlserver.service.port: ''} : ''}
-        volumeMounts:
-        - mountPath: /var/opt/mssql/data
-          name: sqlserver-data
+        - name: {{ .Values.sqlserver.service.name }}
+          image: {{ .Values.sqlserver.image.repository }}:{{ .Values.sqlserver.image.tag }}
+          imagePullPolicy: {{ .Values.sqlserver.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.sqlserver.service.port | int }}
+              name: mssql
+          resources:
+            requests:
+              cpu: {{ .Values.sqlserver.resources.requests.cpu }}
+              memory: {{ .Values.sqlserver.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.sqlserver.resources.limits.cpu }}
+              memory: {{ .Values.sqlserver.resources.limits.memory }}
+          volumeMounts:
+            - name: mssql-data
+              mountPath: /var/opt/mssql
+          envFrom:
+            - secretRef:
+                name: {{ .Values.sqlserver.secret.name }}
+          command: ["/bin/bash", "-c"]
+          args:
+          - "/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"
+      imagePullSecrets:
+        - name: {{ .Values.sqlserver.imagePullSecrets.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: mssql-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: {{ .Values.sqlserver.volume.storageClassName }}
         resources:
           requests:
-            cpu: "{{ .Values.sqlserver.resources.requests.cpu }}"
-            memory: "{{ .Values.sqlserver.resources.requests.memory }}"
-          limits:
-            cpu: "{{ .Values.sqlserver.resources.limits.cpu }}"
-            memory: "{{ .Values.sqlserver.resources.limits.memory }}"
-        env:
-        - name: MSSQL_SA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {? {.Values.sqlserver.secret.name: ''} : ''}
-              key: MSSQL_SA_PASSWORD
-        - name: ACCEPT_EULA
-          value: "Y"
-        command: {? {.Values.sqlserver.command | toJson: ''} : ''}
-        args: {? {.Values.sqlserver.args | toJson: ''} : ''}
-      imagePullSecrets:
-      - name: {? {.Values.sqlserver.imagePullSecrets.name: ''} : ''}
-  volumeClaimTemplates:
-  - metadata:
-      name: sqlserver-data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      storageClassName: {? {.Values.sqlserver.volume.storageClassName: ''} : ''}
-      resources:
-        requests:
-          storage: {? {.Values.sqlserver.volume.size: ''} : ''}
+            storage: {{ .Values.sqlserver.volume.size }}
