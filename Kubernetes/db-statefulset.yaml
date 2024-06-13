@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: sqlserver
-        image: datnd2711/sqlserver:v16
+        image: datnd2711/sqlserver:v19
         ports:
         - containerPort: 1433
         volumeMounts:
@@ -41,6 +41,30 @@ spec:
         command: ["/bin/bash", "-c"]
         args:
         - "/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"
+        livenessProbe:
+          exec:
+            # command:
+            # ["/bin/bash", "-c", "/dbconfig/health_check.sh"]
+            # - /bin/bash
+            # - -c
+            # - "/dbconfig/health_check.sh"
+            command: ["/bin/bash", "-c", " /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy -Q 'SELECT 1'"]
+
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          failureThreshold: 4
+        readinessProbe:
+          exec:
+            # command:
+            # ["/bin/bash", "-c", "/dbconfig/health_check.sh"]
+            # - /bin/bash
+            # - -c
+            # - "/dbconfig/health_check.sh"
+            command: ["/bin/bash", "-c", " /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P DatLaid234555@Xy -Q 'SELECT 1'"]
+
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          failureThreshold: 4
       imagePullSecrets:
       - name: my-dockerhub-secret
   volumeClaimTemplates:
