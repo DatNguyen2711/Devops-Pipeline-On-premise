@@ -12,10 +12,29 @@ sudo apt-get install helm
 
 Step 2: Configure webhooks for jenkins agent in gitlab
 
+```bash
+http://admin:113ce58db5e81ab320567e35ddb9402e7e@jenkins.datlaid.tech:8080/project/app-demo/cicd-k8s-demo
 
+    format : root account + jenkins token @ jenkins url + "projects" + folder's name(if exists) + project's name  
+
+```
+![alt text](image-4.png)
 
 Step 3: Configure build triggers for jenkins agent
 
 ```bash
 kubectl get all -n helm-test
 ```
+
+
+![alt text](image-1.png)
+
+Step 4: copy config file of your cluster into jenkins server then copy config file to jenkins user
+
+Step 5: Configure credentials of jenkins and dockerhub
+![alt text](image-2.png)
+
+Step 6: Install docker plugins for pipeline
+![alt text](image-3.png)
+
+Step 7: Install docker for jenkins server
