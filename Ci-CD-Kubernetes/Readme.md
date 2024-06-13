@@ -1,5 +1,8 @@
 ## CICD for cluster using Jenkins and Helm
 
+### When you merge your branch into master branch trigger will start the pipeline
+
+### This is a pipeline for Monorepo
 Step 1: Install Helm on your Jenkins's server
 
 ```bash
@@ -28,7 +31,7 @@ kubectl get all -n helm-test
 
 
 ![alt text](image-1.png)
-
+![alt text](image-5.png)
 Step 4: copy config file of your cluster into jenkins server then copy config file to jenkins user
 
 Step 5: Configure credentials of jenkins and dockerhub
