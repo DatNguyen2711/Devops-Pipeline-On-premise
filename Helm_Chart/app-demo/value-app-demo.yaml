@@ -13,7 +13,7 @@ backEnd:
     name: back-end-service
     type: ClusterIP
     port: 8080
-    targetPort: 8080 # ensure this is an integer
+    targetPort: http-backend # ensure this is an integer
   resources:
     requests:
       cpu: "250m"
@@ -35,7 +35,7 @@ frontEnd:
     name: front-end-service
     type: ClusterIP
     port: 80
-    targetPort: 80 # ensure this is an integer
+    targetPort: http-frontend # ensure this is an integer
   resources:
     requests:
       cpu: "100m"

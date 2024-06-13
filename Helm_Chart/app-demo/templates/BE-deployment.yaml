@@ -20,8 +20,8 @@ spec:
           image: {{ .Values.backEnd.image.repository }}:{{ .Values.backEnd.image.tag }}
           imagePullPolicy: {{ .Values.backEnd.image.pullPolicy }}
           ports:
-            - name: http-backend
-              containerPort: {{ .Values.backEnd.service.targetPort }}
+            - name: {{ .Values.backEnd.service.targetPort }}
+              containerPort: {{ .Values.backEnd.service.port }}
           resources:
             requests:
               cpu: {{ .Values.backEnd.resources.requests.cpu }}

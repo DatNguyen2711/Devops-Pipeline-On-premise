@@ -20,8 +20,8 @@ spec:
           image: {{ .Values.frontEnd.image.repository }}:{{ .Values.frontEnd.image.tag }}
           imagePullPolicy: {{ .Values.frontEnd.image.pullPolicy }}
           ports:
-            - name: http-frontend
-              containerPort: {{ .Values.frontEnd.service.targetPort }}
+            - name: {{ .Values.frontEnd.service.targetPort }}
+              containerPort: {{ .Values.frontEnd.service.port }}
           resources:
             requests:
               cpu: {{ .Values.frontEnd.resources.requests.cpu }}
