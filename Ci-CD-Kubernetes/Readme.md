@@ -41,3 +41,11 @@ Step 6: Install docker plugins for pipeline
 ![alt text](image-3.png)
 
 Step 7: Install docker for jenkins server
+
+Step 8: Install yq (yaml editor )
+
+```bash
+wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
+    chmod +x /usr/bin/yq
+
+```
