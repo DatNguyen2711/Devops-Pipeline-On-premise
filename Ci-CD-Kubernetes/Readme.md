@@ -25,11 +25,6 @@ http://admin:113ce58db5e81ab320567e35ddb9402e7e@jenkins.datlaid.tech:8080/projec
 
 Step 3: Configure build triggers for jenkins agent
 
-```bash
-kubectl get all -n helm-test
-```
-
-
 ![alt text](image-1.png)
 ![alt text](image-5.png)
 Step 4: copy config file of your cluster into jenkins server then copy config file to jenkins user
