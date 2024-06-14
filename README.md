@@ -15,7 +15,7 @@ This project utilizes the following technologies:
 - **<img src="https://encore.dev/assets/resources/terraform_cover.png" alt="Terraform" width="20" height="20"> Terraform**
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
 - **<img src="https://andrewlock.net/content/images/2019/helm.png" alt="Groovy" width="20" height="20"> Helm**
-- **<img src="[https://andrewlock.net/content/images/2019/helm.png](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Vmware_workstation_16_icon.svg/800px-Vmware_workstation_16_icon.svg.png)" alt="Groovy" width="20" height="20"> VMWare**
+- **<img src="https://tenten.vn/tin-tuc/wp-content/uploads/2023/09/tao-video-AI-bang-D-ID.jpg" alt="VMWare" width="20" height="20"> VMWare**
 
 # Getting Started
 
