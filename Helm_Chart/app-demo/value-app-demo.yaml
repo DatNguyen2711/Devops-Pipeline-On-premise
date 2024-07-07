@@ -1,11 +1,11 @@
 namespace: test-helm
 
 backEnd:
-  replicaCount: 3
+  replicaCount: 2
   name: back-end
   image:
     repository: datnd2711/pharmacy-be
-    tag: v3
+    tag: prod-0.82
     pullPolicy: IfNotPresent
   imagePullSecrets:
     name: my-dockerhub-secret
@@ -13,7 +13,7 @@ backEnd:
     name: back-end-service
     type: ClusterIP
     port: 8080
-    targetPort: http-backend # ensure this is an integer
+    targetPort: "http-backend" # Tên cổng cụ thể
   resources:
     requests:
       cpu: "250m"
@@ -23,11 +23,11 @@ backEnd:
       memory: "512Mi"
 
 frontEnd:
-  replicaCount: 2
+  replicaCount: 1
   name: front-end
   image:
     repository: datnd2711/pharmacy-fe
-    tag: v5
+    tag: prod-0.105
     pullPolicy: IfNotPresent
   imagePullSecrets:
     name: my-dockerhub-secret
@@ -35,7 +35,7 @@ frontEnd:
     name: front-end-service
     type: ClusterIP
     port: 80
-    targetPort: http-frontend # ensure this is an integer
+    targetPort: "http-frontend" # ensure this is an integer
   resources:
     requests:
       cpu: "100m"
@@ -47,7 +47,7 @@ frontEnd:
 sqlserver:
   image:
     repository: datnd2711/sqlserver
-    tag: v19
+    tag: prod-0.72
     pullPolicy: IfNotPresent
   imagePullSecrets:
     name: my-dockerhub-secret
@@ -68,11 +68,10 @@ sqlserver:
     name: sqlserver-secret
     MSSQL_SA_PASSWORD: RGF0TGFpZDIzNDU1NUBYeQ==
     # command: ["/bin/bash", "-c"]
-# args: ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
+    # args: ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
 
 
 ingress:
-
   name: pharmacy-ingress
   annotations:
     cert-manager.io/issuer: "letsencrypt-prod"
@@ -86,14 +85,15 @@ ingress:
     paths:
     - path: /
       pathType: Prefix
-      backend:
+      frontend:
         serviceName: front-end-service
-        servicePort: http-fe
+        servicePort: http-frontend
     - path: /api
       pathType: Prefix
       backend:
         serviceName: back-end-service
-        servicePort: http-be
+        servicePort: http-backend
+
 
 certManager:
   issuer:
