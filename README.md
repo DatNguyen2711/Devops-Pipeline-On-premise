@@ -16,6 +16,7 @@ This project utilizes the following technologies:
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
 - **<img src="https://andrewlock.net/content/images/2019/helm.png" alt="Groovy" width="20" height="20"> Helm**
 - **<img src="https://tenten.vn/tin-tuc/wp-content/uploads/2023/09/tao-video-AI-bang-D-ID.jpg" alt="VMWare" width="20" height="20"> VMWare**
+- **<img src="https://argoproj.github.io/argo-cd/assets/logo.png" alt="Argo CD" width="20" height="20"> ArgoCD**
 
 # Getting Started
 
@@ -33,14 +34,14 @@ This project uses [`next/font`](https://dotnet.microsoft.com/en-us/download/dotn
 
 ## Learn More
 
+## Deploy on EC2 Instance
 
-## Deploy on EC2 Instance 
-
-The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:) 
+The easiest way to deploy this app is to use the AWS EC2 [AWS Platform](https://ap-southeast-1.console.aws.amazon.com/ec2/home?region=ap-southeast-1#Home:)
 
 Step 1: Register a EC2 (T2 medium above because SQL server need 2000MB to run) instance using Ubuntu ( Remember you open Inbound Rules of Instance before run the application [AWS Platform](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.create-cluster.console.configure-inbound-rules.html) )
 
 Step 2: Download Docker (lastest version is best)
+
 ```bash
 mkdir -p /tools/docker
 
@@ -66,19 +67,26 @@ sh docker-install.sh
 sudo usermod -aG docker $(whoami)
 
 ```
+
 Step 3 : Clone this Repo and cd path/to/the repo
+
 ```bash
 docker compose up -d
 ```
+
 Step 4:
 Go to the address:
+
 ```bash
 http://{instance_public_IP_address}:8900
 ```
+
 ## More
-You can using certbot and buy an domain 
+
+You can using certbot and buy an domain
 
 ## Create EC2 Instance with Terraform
+
 ![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/b8fc4c6e-9102-43a1-8890-caffc5acf6ed)
 
 Step 1: First, run you have to create AWS account and IAM user account
@@ -95,7 +103,6 @@ then...
 ![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/fb448382-f8d7-413b-9f9f-8c0f110daa6d)
 then name your tag, here is your access key
 ![image](https://github.com/DatNguyen2711/Pharmacy-Web/assets/81822483/9bf0abe7-6155-4b7a-9843-1d045ef6177b)
-
 
 Step 3: Configure aws key in your local machine
 
