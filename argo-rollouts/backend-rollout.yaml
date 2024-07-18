@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: back-end
-        image: datnd2711/pharmacy-be:v3
+        image: datnd2711/pharmacy-be:prod-0.82
         ports:
         - containerPort: 8080
           name: http-backend

@@ -16,7 +16,7 @@ This project utilizes the following technologies:
 - **<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> Groovy**
 - **<img src="https://andrewlock.net/content/images/2019/helm.png" alt="Groovy" width="20" height="20"> Helm**
 - **<img src="https://tenten.vn/tin-tuc/wp-content/uploads/2023/09/tao-video-AI-bang-D-ID.jpg" alt="VMWare" width="20" height="20"> VMWare**
-- **<img src="![image](https://github.com/user-attachments/assets/fea21715-b59c-4cb1-b78b-7a5700a0d5f0)" alt="Argo CD" width="20" height="20"> ArgoCD**
+- **<img src="https://cdn.prod.website-files.com/6203daf47137054c031fa0e6/63c7f4ab9471e63a01d7d285_argo-icon-color.png" alt="Argo CD" width="20" height="20"> ArgoCD**
 
 # Getting Started
 
