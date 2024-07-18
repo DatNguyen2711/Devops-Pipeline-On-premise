@@ -38,9 +38,6 @@ spec:
               key: MSSQL_SA_PASSWORD
         - name: ACCEPT_EULA
           value: "Y"
-        command: ["/bin/bash", "-c"]
-        args:
-        - "/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"
         livenessProbe:
           exec:
             command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $(cat /mnt/secrets-store/MSSQL_SA_PASSWORD) -Q 'SELECT 1'"]
@@ -54,9 +51,18 @@ spec:
           periodSeconds: 20
           failureThreshold: 6
         # securityContext:
-        #   runAsUser: 1000
-        #   runAsGroup: 3000
-        #   fsGroup: 2000
+      #   runAsUser: 1000
+      #   runAsGroup: 3000
+      #   fsGroup: 2000
+      initContainers:
+      - name: init-sqlserver
+        image: datnd2711/sqlserver:v19
+        command: ["/bin/bash", "-c"]
+        args:
+        - "/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"
+        volumeMounts:
+        - mountPath: /var/opt/mssql/data
+          name: sqlserver-data
       imagePullSecrets:
       - name: my-dockerhub-secret
       volumes:
