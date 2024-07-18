@@ -21,12 +21,26 @@ spec:
         ports:
         - containerPort: 80
           name: http-frontend
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-frontend
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-frontend
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3
       imagePullSecrets:
       - name: my-dockerhub-secret
-        resources:
-      requests:
-        cpu: "100m"
-        memory: "128Mi"
-      limits:
-        cpu: "200m"
-        memory: "256Mi"
