@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: pharmacy-app
+  name: front-end
+  labels:
+    component: front-end
+spec:
+  replicas: 2
+  strategy:
+    blueGreen:
+      activeService: front-end-service-active
+      previewService: front-end-service-preview
+      autoPromotionEnabled: true
+      scaleDownDelaySeconds: 60
+  selector:
+    matchLabels:
+      component: front-end
+  template:
+    metadata:
+      labels:
+        component: front-end
+    spec:
+      containers:
+      - name: front-end
+        image: datnd2711/pharmacy-fe:v5
+        ports:
+        - containerPort: 80
+          name: http-frontend
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http-frontend
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http-frontend
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3
+      imagePullSecrets:
+      - name: my-dockerhub-secret
