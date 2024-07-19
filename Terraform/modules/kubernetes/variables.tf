@@ -5,7 +5,6 @@ variable "imnage_pull_secret" {
 
 variable "namespace" {
   type    = string
-  default = "pharmacy-app"
 }
 
 
@@ -124,6 +123,31 @@ variable "statefulset_config" {
       requests = object({
         storage = string
       })
+    }))
+  })
+}
+
+variable "ingress_config" {
+  description = "Configuration for the Ingress resource"
+  type = object({
+    name               = string
+    namespace          = string
+    annotations        = map(string)
+    ingress_class_name = string
+    tls = list(object({
+      hosts       = list(string)
+      secret_name = string
+    }))
+    rules = list(object({
+      host = string
+      paths = list(object({
+        path      = string
+        path_type = string
+        backend = object({
+          service_name = string
+          service_port = string
+        })
+      }))
     }))
   })
 }

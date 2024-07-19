@@ -3,6 +3,11 @@ variable "kubeconfig_path" {
   type        = string
   default     = "~/.kube/config"
 }
+
+variable "namespace" {
+  description = "Kubernetes namespace for the application"
+  default     = "pharmacy-app"
+}
 variable "deployment_config_frontend" {
   description = "Configuration for the frontend Kubernetes deployment"
   default = {
@@ -119,3 +124,39 @@ variable "sqlserver_statefulset_config" {
     }]
   }
 }
+
+variable "ingress_config" {
+
+  default = {
+    name      = "pharmacy-ingress"
+    namespace = "pharmacy-app"
+    annotations = {
+      "cert-manager.io/issuer" = "letsencrypt-prod"
+    }
+    ingress_class_name = "nginx"
+    tls = [{
+      hosts       = ["demo.datlaid.com"]
+      secret_name = "pharmacy-app"
+    }]
+    rules = [{
+      host = "demo.datlaid.com"
+      paths = [{
+        path      = "/"
+        path_type = "Prefix"
+        backend = {
+          service_name = "front-end-service"
+          service_port = "http-fe"
+        }
+        }, {
+        path      = "/api"
+        path_type = "Prefix"
+        backend = {
+          service_name = "back-end-service"
+          service_port = "http-be"
+        }
+      }]
+    }]
+  }
+
+}
+

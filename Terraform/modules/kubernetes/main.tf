@@ -161,8 +161,6 @@ resource "kubernetes_deployment" "frontend" {
   }
 }
 
-
-
 resource "kubernetes_stateful_set" "sqlserver" {
   metadata {
     name      = var.statefulset_config.name
@@ -294,6 +292,51 @@ resource "kubernetes_stateful_set" "sqlserver" {
           resources {
             requests = {
               storage = volume_claim_templates.value.requests.storage
+            }
+          }
+        }
+      }
+    }
+  }
+}
+resource "kubernetes_ingress" "ingress" {
+  metadata {
+    name        = var.ingress_config.name
+    namespace   = kubernetes_namespace.namespace.metadata[0].name
+    annotations = var.ingress_config.annotations
+  }
+
+  spec {
+    ingress_class_name = var.ingress_config.ingress_class_name
+
+    dynamic "tls" {
+      for_each = var.ingress_config.tls
+      content {
+        hosts       = tls.value.hosts
+        secret_name = tls.value.secret_name
+      }
+    }
+
+    dynamic "rules" {
+      for_each = var.ingress_config.rules
+      content {
+        host = rules.value.host
+
+        http {
+          dynamic "paths" {
+            for_each = rules.value.paths
+            content {
+              path      = paths.value.path
+              path_type = paths.value.path_type
+
+              backend {
+                service {
+                  name = paths.value.backend.service_name
+                  port {
+                    name = paths.value.backend.service_port
+                  }
+                }
+              }
             }
           }
         }
