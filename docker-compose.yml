@@ -56,7 +56,11 @@ services:
     networks:
       - db-network
     healthcheck:
-      test: ["CMD-SHELL", "chmod +x healthcheck.bash & ./healthcheck.bash"]
+      test:
+        [
+          "CMD-SHELL",
+          "chmod +x /dbconfig/health_check.sh & ./dbconfig/health_check.sh",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
