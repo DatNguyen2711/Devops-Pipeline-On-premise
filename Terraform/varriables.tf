@@ -5,41 +5,6 @@ variable "kubeconfig_path" {
 }
 variable "deployment_config_frontend" {
   description = "Configuration for the frontend Kubernetes deployment"
-  type = object({
-    name           = string
-    namespace      = string
-    component      = string
-    replicas       = number
-    container_name = string
-    image          = string
-    container_port = number
-    port_name      = string
-    resources = object({
-      requests = object({
-        cpu    = string
-        memory = string
-      })
-      limits = object({
-        cpu    = string
-        memory = string
-      })
-    })
-    liveness_probe = object({
-      path                  = string
-      port                  = string
-      initial_delay_seconds = number
-      period_seconds        = number
-      failure_threshold     = number
-    })
-    readiness_probe = object({
-      path                  = string
-      port                  = string
-      initial_delay_seconds = number
-      period_seconds        = number
-      failure_threshold     = number
-    })
-    image_pull_secret_name = string
-  })
   default = {
     name           = "front-end"
     namespace      = "pharmacy-app"
@@ -78,27 +43,7 @@ variable "deployment_config_frontend" {
 }
 variable "deployment_config_backend" {
   description = "Configuration for the Kubernetes deployment"
-  type = object({
-    name           = string
-    namespace      = string
-    component      = string
-    replicas       = number
-    container_name = string
-    image          = string
-    container_port = number
-    port_name      = string
-    resources = object({
-      requests = object({
-        cpu    = string
-        memory = string
-      })
-      limits = object({
-        cpu    = string
-        memory = string
-      })
-    })
-    image_pull_secret_name = string
-  })
+
   default = {
     name           = "back-end"
     namespace      = "pharmacy-app"
@@ -119,5 +64,58 @@ variable "deployment_config_backend" {
       }
     }
     image_pull_secret_name = "my-dockerhub-secret"
+  }
+}
+variable "sqlserver_statefulset_config" {
+  description = "Configuration for the SQL Server statefulset"
+  default = {
+    name           = "sqlserver"
+    namespace      = "pharmacy-app"
+    component      = "sqlserver"
+    container_name = "sqlserver"
+    image          = "datnd2711/sqlserver:v19"
+    container_port = 1433
+    volume_mounts = [{
+      mount_path = "/var/opt/mssql/data"
+      name       = "sqlserver-data"
+    }]
+    resources = {
+      requests = {
+        cpu    = "500m"
+        memory = "1Gi"
+      }
+      limits = {
+        cpu    = "1"
+        memory = "2Gi"
+      }
+    }
+    env = [{
+      name  = "ACCEPT_EULA"
+      value = "Y"
+    }]
+    secret_env = [{
+      name        = "MSSQL_SA_PASSWORD"
+      key         = "MSSQL_SA_PASSWORD"
+      secret_name = "sqlserver-secret"
+    }]
+    init_containers = [{
+      name    = "init-sqlserver"
+      image   = "datnd2711/sqlserver:v19"
+      command = ["/bin/bash", "-c"]
+      args    = ["/dbconfig/attach.sh && /opt/mssql/bin/sqlservr && tail -f /dev/null"]
+      volume_mounts = [{
+        mount_path = "/var/opt/mssql/data"
+        name       = "sqlserver-data"
+      }]
+    }]
+    image_pull_secret_name = "my-dockerhub-secret"
+    volume_claim_templates = [{
+      name               = "sqlserver-data"
+      access_modes       = ["ReadWriteOnce"]
+      storage_class_name = "nfs-client"
+      requests = {
+        storage = "3Gi"
+      }
+    }]
   }
 }

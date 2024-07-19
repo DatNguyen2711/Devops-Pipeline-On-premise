@@ -1,7 +1,13 @@
+resource "kubernetes_namespace" "namespace" {
+  metadata {
+    name = var.namespace
+  }
+}
+
 resource "kubernetes_secret" "dockerhub" {
   metadata {
     name      = var.imnage_pull_secret.name
-    namespace = var.namespace.name
+    namespace = kubernetes_namespace.namespace.metadata[0].name
   }
 
   data = {
@@ -19,11 +25,22 @@ resource "kubernetes_secret" "dockerhub" {
 
   type = "kubernetes.io/dockerconfigjson"
 }
+resource "kubernetes_secret" "sqlserver" {
+  metadata {
+    name      = "sqlserver-secret"
+    namespace = kubernetes_namespace.namespace.metadata[0].name
+  }
 
+  data = {
+    MSSQL_SA_PASSWORD = "RGF0TGFpZDIzNDU1NUBYeQ=="
+  }
+
+  type = "Opaque"
+}
 resource "kubernetes_deployment" "backend" {
   metadata {
     name      = var.deployment_config_backend.name
-    namespace = var.deployment_config_backend.namespace
+    namespace = kubernetes_namespace.namespace.metadata[0].name
     labels = {
       component = var.deployment_config_backend.component
     }
@@ -76,7 +93,7 @@ resource "kubernetes_deployment" "backend" {
 resource "kubernetes_deployment" "frontend" {
   metadata {
     name      = var.deployment_config_frontend.name
-    namespace = var.deployment_config_frontend.namespace
+    namespace = kubernetes_namespace.namespace.metadata[0].name
     labels = {
       component = var.deployment_config_frontend.component
     }
@@ -138,6 +155,147 @@ resource "kubernetes_deployment" "frontend" {
 
         image_pull_secrets {
           name = kubernetes_secret.dockerhub.metadata[0].name
+        }
+      }
+    }
+  }
+}
+
+
+
+resource "kubernetes_stateful_set" "sqlserver" {
+  metadata {
+    name      = var.statefulset_config.name
+    namespace = kubernetes_namespace.namespace.metadata[0].name
+    labels = {
+      component = var.statefulset_config.component
+    }
+  }
+
+  spec {
+    selector {
+      match_labels = {
+        component = var.statefulset_config.component
+      }
+    }
+
+    service_name = "sqlserver"
+    replicas     = 1
+
+    template {
+      metadata {
+        labels = {
+          component = var.statefulset_config.component
+        }
+      }
+
+      spec {
+        container {
+          name  = var.statefulset_config.container_name
+          image = var.statefulset_config.image
+
+          port {
+            container_port = var.statefulset_config.container_port
+          }
+
+          dynamic "volume_mounts" {
+            for_each = var.statefulset_config.volume_mounts
+            content {
+              mount_path = volume_mounts.value.mount_path
+              name       = volume_mounts.value.name
+            }
+          }
+
+          resources {
+            requests = {
+              cpu    = var.statefulset_config.resources.requests.cpu
+              memory = var.statefulset_config.resources.requests.memory
+            }
+            limits = {
+              cpu    = var.statefulset_config.resources.limits.cpu
+              memory = var.statefulset_config.resources.limits.memory
+            }
+          }
+
+          dynamic "env" {
+            for_each = var.statefulset_config.env
+            content {
+              name  = env.value.name
+              value = env.value.value
+            }
+          }
+
+          dynamic "env" {
+            for_each = var.statefulset_config.secret_env
+            content {
+              name = env.value.name
+              value_from {
+                secret_key_ref {
+                  name = env.value.secret_name
+                  key  = env.value.key
+                }
+              }
+            }
+          }
+
+          liveness_probe {
+            exec {
+              command = ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $(cat /mnt/secrets-store/MSSQL_SA_PASSWORD) -Q 'SELECT 1'"]
+            }
+            initial_delay_seconds = 60
+            period_seconds        = 20
+            failure_threshold     = 6
+          }
+
+          readiness_probe {
+            exec {
+              command = ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $(cat /mnt/secrets-store/MSSQL_SA_PASSWORD) -Q 'SELECT 1'"]
+            }
+            initial_delay_seconds = 60
+            period_seconds        = 20
+            failure_threshold     = 6
+          }
+        }
+
+        dynamic "init_container" {
+          for_each = var.statefulset_config.init_containers
+          content {
+            name    = init_container.value.name
+            image   = init_container.value.image
+            command = init_container.value.command
+            args    = init_container.value.args
+
+            dynamic "volume_mounts" {
+              for_each = init_container.value.volume_mounts
+              content {
+                mount_path = volume_mounts.value.mount_path
+                name       = volume_mounts.value.name
+              }
+            }
+          }
+        }
+
+        image_pull_secrets {
+          name = kubernetes_secret.dockerhub.metadata[0].name
+        }
+      }
+    }
+
+    dynamic "volume_claim_templates" {
+      for_each = var.statefulset_config.volume_claim_templates
+      content {
+        metadata {
+          name = volume_claim_templates.value.name
+        }
+
+        spec {
+          access_modes       = volume_claim_templates.value.access_modes
+          storage_class_name = volume_claim_templates.value.storage_class_name
+          resources {
+            requests = {
+              storage = volume_claim_templates.value.requests.storage
+            }
+          }
         }
       }
     }

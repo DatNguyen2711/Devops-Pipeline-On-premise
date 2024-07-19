@@ -1,14 +1,12 @@
 variable "imnage_pull_secret" {
-  type        = string
-  default     = "my-dockerhub-secret"
+  type    = string
+  default = "my-dockerhub-secret"
 }
-
 
 variable "namespace" {
-  type        = string
-  default     = "pharmacy-app"
+  type    = string
+  default = "pharmacy-app"
 }
-
 
 
 variable "deployment_config_backend" {
@@ -73,5 +71,59 @@ variable "deployment_config_frontend" {
     })
     image_pull_secret_name = string
     docker_config_json     = string
+  })
+}
+
+variable "statefulset_config" {
+  description = "Configuration for the SQL Server statefulset"
+  type = object({
+    name           = string
+    namespace      = string
+    component      = string
+    container_name = string
+    image          = string
+    container_port = number
+    volume_mounts = list(object({
+      mount_path = string
+      name       = string
+    }))
+    resources = object({
+      requests = object({
+        cpu    = string
+        memory = string
+      })
+      limits = object({
+        cpu    = string
+        memory = string
+      })
+    })
+    env = list(object({
+      name  = string
+      value = string
+    }))
+    secret_env = list(object({
+      name        = string
+      key         = string
+      secret_name = string
+    }))
+    init_containers = list(object({
+      name    = string
+      image   = string
+      command = list(string)
+      args    = list(string)
+      volume_mounts = list(object({
+        mount_path = string
+        name       = string
+      }))
+    }))
+    image_pull_secret_name = string
+    volume_claim_templates = list(object({
+      name               = string
+      access_modes       = list(string)
+      storage_class_name = string
+      requests = object({
+        storage = string
+      })
+    }))
   })
 }
