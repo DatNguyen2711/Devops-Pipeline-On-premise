@@ -15,10 +15,10 @@ This project utilizes the following technologies:
 | <img src="https://manhha.dev/content/images/2022/03/00-featured-image-1.png" alt="Ubuntu" width="20" height="20"> **Ubuntu** | Operating System                 |
 | <img src="https://encore.dev/assets/resources/kubernetes_cover.png" alt="Kubernetes" width="20" height="20"> **Kubernetes** | Container orchestration          |
 | <img src="https://encore.dev/assets/resources/terraform_cover.png" alt="Terraform" width="20" height="20"> **Terraform** | Infrastructure as Code (IaC)     |
-| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> **Groovy** | Scripting language (Jenkins pipeline)             |
+| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Groovy-logo.svg/640px-Groovy-logo.svg.png" alt="Groovy" width="20" height="20"> **Groovy** | Scripting (Jenkins pipeline script)             |
 | <img src="https://andrewlock.net/content/images/2019/helm.png" alt="Helm" width="20" height="20"> **Helm** | Kubernetes package management    |
 | <img src="https://tenten.vn/tin-tuc/wp-content/uploads/2023/09/tao-video-AI-bang-D-ID.jpg" alt="VMWare" width="20" height="20"> **VMWare** | Virtualization (100% infra using this)                   |
-| <img src="https://cdn.prod.website-files.com/6203daf47137054c031fa0e6/63c7f4ab9471e63a01d7d285_argo-icon-color.png" alt="Argo CD" width="20" height="20"> **ArgoCD** | Continuous Deployment            |
+| <img src="https://cdn.prod.website-files.com/6203daf47137054c031fa0e6/63c7f4ab9471e63a01d7d285_argo-icon-color.png" alt="Argo CD" width="20" height="20"> **ArgoCD** | Gitops            |
 | <img src="https://images.viblo.asia/6d8f3347-3bac-4d34-98a3-c25ab17ddb7c.png" alt="Argo Rollout" width="20" height="20"> **Argo-Rollout** | Progressive Delivery             |
 
 # Getting Started
