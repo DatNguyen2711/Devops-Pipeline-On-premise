@@ -19,7 +19,8 @@ This project utilizes the following technologies:
 | <img src="https://andrewlock.net/content/images/2019/helm.png" alt="Helm" width="20" height="20"> **Helm** | Kubernetes package management    |
 | <img src="https://tenten.vn/tin-tuc/wp-content/uploads/2023/09/tao-video-AI-bang-D-ID.jpg" alt="VMWare" width="20" height="20"> **VMWare** | Virtualization (100% infra using this)                   |
 | <img src="https://cdn.prod.website-files.com/6203daf47137054c031fa0e6/63c7f4ab9471e63a01d7d285_argo-icon-color.png" alt="Argo CD" width="20" height="20"> **ArgoCD** | Gitops            |
-| <img src="https://images.viblo.asia/6d8f3347-3bac-4d34-98a3-c25ab17ddb7c.png" alt="Argo Rollout" width="20" height="20"> **Argo-Rollout** | Progressive Delivery             |
+| <img src="https://images.viblo.asia/6d8f3347-3bac-4d34-98a3-c25ab17ddb7c.png" alt="Argo Rollout" width="20" height="20"> **Argo-Rollout** | Blue/Green Deployment             |
+| <img src="https://dyltqmyl993wv.cloudfront.net/assets/stacks/sealed-secrets/img/sealed-secrets-stack-220x234.png" alt="Bitnami Sealed Secrets" width="20" height="20"> **Bitnami Sealed Secrets** | Bitnami Sealed Secrets  (Secure Secret Management) |
 
 # Getting Started
 
