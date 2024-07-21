@@ -42,3 +42,7 @@ spec:
             {{- end }}
           {{- end }}
     {{- end }}
+tls:
+- hosts:
+  - demo.datlaid.com
+  secretName: ssl-demo.datlaid.com
