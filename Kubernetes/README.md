@@ -12,6 +12,9 @@
 
 *Cri-o*
 
+*Bitnami/Sealed Secret*
+
+
 Step 1: First, config the ConnectionStrings at back-end
 
 ```bash
