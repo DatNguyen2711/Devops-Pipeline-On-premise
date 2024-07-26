@@ -49,7 +49,7 @@ Step 2: Download Docker (lastest version is best)
 ```bash
 mkdir -p /tools/docker
 
-touch docker-install.sh && chmod +x docker-install.sh && nano docker-install.sh
+touch docker-install.sh && chmod +x docker-install.sh && vi docker-install.sh
 
 #!/bin/bash
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
@@ -65,7 +65,7 @@ docker -v
 docker-compose -v
 
 
-sh docker-install.sh
+./docker-install.sh
 
 
 sudo usermod -aG docker $(whoami)
