@@ -160,3 +160,18 @@ variable "ingress_config" {
 
 }
 
+
+variable "resource_quota" {
+  type = object({
+    spec = object({
+      requests = object({
+        cpu    = "1.5"
+        memory = "2.5Gi"
+      })
+      limits = object({
+        cpu    = "3"
+        memory = "5Gi"
+      })
+    })
+  })
+}

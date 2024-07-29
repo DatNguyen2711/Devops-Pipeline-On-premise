@@ -4,7 +4,7 @@ variable "imnage_pull_secret" {
 }
 
 variable "namespace" {
-  type    = string
+  type = string
 }
 
 
@@ -149,5 +149,20 @@ variable "ingress_config" {
         })
       }))
     }))
+  })
+}
+
+variable "resource_quota" {
+  type = object({
+    spec = object({
+      requests = object({
+        cpu    = string
+        memory = string
+      })
+      limits = object({
+        cpu    = string
+        memory = string
+      })
+    })
   })
 }

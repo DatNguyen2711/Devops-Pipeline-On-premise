@@ -3,7 +3,6 @@ resource "kubernetes_namespace" "namespace" {
     name = var.namespace
   }
 }
-
 resource "kubernetes_secret" "dockerhub" {
   metadata {
     name      = var.imnage_pull_secret.name
@@ -344,3 +343,22 @@ resource "kubernetes_ingress" "ingress" {
     }
   }
 }
+
+
+
+resource "kubernetes_resource_quota" "pharmacy_app_quota" {
+  metadata {
+    name      = "pharmacy-app-quota"
+    namespace = "pharmacy-app"
+  }
+
+  spec {
+    hard = {
+      "requests.cpu"    = var.resource_quota.spec.requests.cpu
+      "requests.memory" = var.resource_quota.spec.requests.memory
+      "limits.cpu"      = var.resource_quota.spec.limits.cpu
+      "limits.memory"   = var.resource_quota.spec.limits.memory
+    }
+  }
+}
+

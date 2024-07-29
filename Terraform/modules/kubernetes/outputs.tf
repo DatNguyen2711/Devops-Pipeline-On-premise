@@ -19,3 +19,7 @@ output "sqlserver_statefulset_name" {
 output "ingress_name" {
   value = kubernetes_ingress.ingress.metadata[0].name
 }
+
+output "resouce_quota_name" {
+  value = kubernetes_resource_quota.pharmacy_app_quota.metadata[0].name
+}
