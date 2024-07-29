@@ -69,17 +69,17 @@ spec:
 
                     if (changedFiles.any { it.startsWith('Medicine-Web-FE/') }) {
                         servicesToBuild.add('Medicine-Web-FE')
-                }
+                    }
                     if (changedFiles.any { it.startsWith('Medicine-Web/') }) {
                         servicesToBuild.add('Medicine-Web')
-            }
+                    }
                     if (changedFiles.any { it.startsWith('Database/') }) {
                         servicesToBuild.add('Database')
-        }
+                    }
 
                     env.SERVICES_TO_BUILD = servicesToBuild.join(',')
-    }
-}
+                }
+            }
         }
         stage('Build and Push Images') {
             steps {
