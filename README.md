@@ -22,7 +22,7 @@ This project utilizes the following technologies:
 | <img src="https://images.viblo.asia/6d8f3347-3bac-4d34-98a3-c25ab17ddb7c.png" alt="Argo Rollout" width="20" height="20"> **Argo-Rollout** | Blue/Green Deployment             |
 | <img src="https://dyltqmyl993wv.cloudfront.net/assets/stacks/sealed-secrets/img/sealed-secrets-stack-220x234.png" alt="Bitnami Sealed Secrets" width="20" height="20"> **Bitnami Sealed Secrets** | Bitnami Sealed Secrets  (Secure Secret Management) |
 | <img src="https://miro.medium.com/v2/resize:fit:1066/1*FAFtnHl7L7CcIRBzny3zMw.png" alt="Kaniko" width="20" height="20"> **Kaniko** | Build container images in Kubernetes without Docker daemon |
-
+| <img src="https://avatars.githubusercontent.com/u/828078?s=200&v=4" alt="Vault" width="20" height="20"> **HashiCorp Vault**  | Secret management
 
 # Getting Started
 
